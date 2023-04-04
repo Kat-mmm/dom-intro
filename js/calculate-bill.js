@@ -11,3 +11,32 @@
 //  * once done looping over all the entries - display the total onto the screen in the billTotal element
 
 //link the function to a click event on the calculate button
+
+const calculateBtn = document.querySelector(".calculateBtn");
+let billTotalEl = document.querySelector(".billTotal");
+let billStringEl = document.querySelector(".billString");
+
+function totalPhoneBill(log){
+var allLogs = log.split(', ');
+
+var bill = 0;
+for(var i=0; i<allLogs.length; i++){
+    if(allLogs[i] === 'call'){
+    bill += 2.75;
+    }
+    else if(allLogs[i] === 'sms'){
+    bill += 0.65;
+    }
+}
+
+return `${bill.toFixed(2)}`;
+}
+
+function calculateBtnClicked(){
+    let billStringVal = billStringEl.value;
+
+    let roundedBillTotal = totalPhoneBill(billStringVal);
+    billTotalEl.innerHTML = roundedBillTotal;
+}
+
+calculateBtn.addEventListener('click', calculateBtnClicked)

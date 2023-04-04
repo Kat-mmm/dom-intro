@@ -10,3 +10,30 @@
 // * add the appropriate value to the running total
 // * add nothing for invalid values that is not 'call' or 'sms'.
 // * display the latest total on the screen
+const billType = document.querySelector(".billTypeText");
+const addBtn =  document.querySelector(".addToBillBtn");
+let callTotalEl = document.querySelector(".callTotalOne");
+let smsTotalEl = document.querySelector(".smsTotalOne");
+let total = document.querySelector(".totalOne");
+
+let callsTotal = 0;
+let smsTotals = 0;
+
+function textBillTotal(){
+    let billVal = billType.value.trim()
+    if(billVal === 'sms'){
+        smsTotals += 0.75;
+    }
+    else if(billVal === 'call'){
+        callsTotal += 2.75;
+    }
+
+    callTotalEl.innerHTML = callsTotal.toFixed(2);
+    smsTotalEl.innerHTML = smsTotals.toFixed(2);
+
+    let billTotal = callsTotal + smsTotals;
+    total.innerHTML = billTotal.toFixed(2);
+}
+
+
+addBtn.addEventListener('click', textBillTotal)
