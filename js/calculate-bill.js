@@ -17,7 +17,7 @@ let billTotalEl = document.querySelector(".billTotal");
 let billStringEl = document.querySelector(".billString");
 
 function totalPhoneBill(log){
-var allLogs = log.split(', ');
+var allLogs = log.toLowerCase().split(', ');
 
 var bill = 0;
 for(var i=0; i<allLogs.length; i++){
@@ -37,6 +37,9 @@ function calculateBtnClicked(){
 
     let roundedBillTotal = totalPhoneBill(billStringVal);
     billTotalEl.innerHTML = roundedBillTotal;
+
+    roundedBillTotal >= 30 ? billTotalEl.classList.add("warning") : null
+    roundedBillTotal >=50 ? billTotalEl.classList.add("danger") : null
 }
 
 calculateBtn.addEventListener('click', calculateBtnClicked)
