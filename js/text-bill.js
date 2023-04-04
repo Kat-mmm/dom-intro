@@ -33,7 +33,15 @@ function textBillTotal(){
 
     let billTotal = callsTotal + smsTotals;
     total.innerHTML = billTotal.toFixed(2);
+
+    if(billTotal >= 50){
+        total.classList.add("danger");
+    }
+    else if(billTotal >=30){
+        total.classList.add("warning");
+    }
 }
+
 
 
 addBtn.addEventListener('click', textBillTotal)
