@@ -51,12 +51,20 @@ function updateSettinsBill(){
 
     criticalLevels = criticalLevel.value;
     warningLevels = warningLevel.value;
+
+    updateLevels(settingsTotal, ovTotal, warningLevels, criticalLevels);
+}
+
+function updateLevels(el, total, warningLevel, criticalLevel){
+    total >= warningLevel ? el.classList.add("warning") : el.classList.remove("warning")
+    total >= criticalLevel ? el.classList.add("danger") : el.classList.remove("danger")
 }
 
 updateSettingsBtn.addEventListener('click', updateSettinsBill)
 
 let settingsCallsTotal = 0;
 let settingsSmsToatl = 0;
+let ovTotal = 0;
 
 function totalSettingsBill(){
     if(checkedValue === 'sms'){
@@ -69,13 +77,14 @@ function totalSettingsBill(){
     callSettingsTotals.innerHTML = settingsCallsTotal.toFixed(2)
     smsSettingsTotals.innerHTML = settingsSmsToatl.toFixed(2)
 
-    let ovTotal = settingsCallsTotal + settingsSmsToatl;
+    ovTotal = settingsCallsTotal + settingsSmsToatl;
     settingsTotal.innerHTML = ovTotal.toFixed(2);
 
-    if(ovTotal >= warningLevels){
-        settingsTotal.classList.add("warning");
-    }
-    ovTotal >= criticalLevels ? settingsTotal.classList.add("danger") : null;
+    // if(ovTotal >= warningLevels){
+    //     settingsTotal.classList.add("warning");
+    // }
+    // ovTotal >= criticalLevels ? settingsTotal.classList.add("danger") : null;
+    updateLevels(settingsTotal, ovTotal, warningLevels, criticalLevels);
 }
 
 addSettingsBillBtn.addEventListener('click', totalSettingsBill);
