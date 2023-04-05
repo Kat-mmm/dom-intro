@@ -20,3 +20,64 @@
 // * add nothing for invalid values that is not 'call' or 'sms'.
 // * display the latest total on the screen.
 // * check the value thresholds and display the total value in the right color.
+let radioBtns = document.querySelectorAll(".billItemTypeWithSettings");
+const addSettingsBillBtn = document.querySelector(".settingsAddBtn");
+let callSettingsTotals = document.querySelector(".callTotalSettings");
+let smsSettingsTotals = document.querySelector(".smsTotalSettings");
+let settingsTotal = document.querySelector(".totalSettings");
+let callCost = document.querySelector('.callCostSetting');
+let smsCost = document.querySelector('.smsCostSetting');
+let warningLevel = document.querySelector(".warningLevelSetting");
+let criticalLevel = document.querySelector(".criticalLevelSetting");
+const updateSettingsBtn = document.querySelector(".updateSettings")
+
+let checkedValue = '';
+radioBtns.forEach((item) => {
+    item.addEventListener('change', () =>{
+        checkedValue = item.value;
+    });
+});
+
+let smsCosts = 0;
+let callCosts = 0;
+
+let criticalLevels = 0;
+let warningLevels = 0;
+
+
+function updateSettinsBill(){
+    smsCosts = smsCost.value;
+    callCosts = callCost.value;
+
+    criticalLevels = criticalLevel.value;
+    warningLevels = warningLevel.value;
+}
+
+updateSettingsBtn.addEventListener('click', updateSettinsBill)
+
+let settingsCallsTotal = 0;
+let settingsSmsToatl = 0;
+
+function totalSettingsBill(){
+    if(checkedValue === 'sms'){
+        settingsSmsToatl += Number(smsCosts);
+    }
+    else if(checkedValue === 'call'){
+        settingsCallsTotal += Number(callCosts);
+    }
+
+    callSettingsTotals.innerHTML = settingsCallsTotal.toFixed(2)
+    smsSettingsTotals.innerHTML = settingsSmsToatl.toFixed(2)
+
+    let ovTotal = settingsCallsTotal + settingsSmsToatl;
+    settingsTotal.innerHTML = ovTotal.toFixed(2);
+
+    if(ovTotal >= warningLevels){
+        settingsTotal.classList.add("warning");
+    }
+    ovTotal >= criticalLevels ? settingsTotal.classList.add("danger") : null;
+}
+
+addSettingsBillBtn.addEventListener('click', totalSettingsBill);
+
+

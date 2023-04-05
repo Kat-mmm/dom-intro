@@ -38,8 +38,8 @@ function calculateBtnClicked(){
     let roundedBillTotal = totalPhoneBill(billStringVal);
     billTotalEl.innerHTML = roundedBillTotal;
 
-    roundedBillTotal >= 30 ? billTotalEl.classList.add("warning") : null
-    roundedBillTotal >=50 ? billTotalEl.classList.add("danger") : null
+    roundedBillTotal >= 30 ? billTotalEl.classList.add("warning") : billTotalEl.classList.remove("warning")
+    roundedBillTotal >=50 ? billTotalEl.classList.add("danger") : billTotalEl.classList.remove("danger")
 }
 
 calculateBtn.addEventListener('click', calculateBtnClicked)
