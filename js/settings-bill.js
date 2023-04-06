@@ -68,10 +68,15 @@ let ovTotal =  0;
 
 function totalSettingsBill(){
     if(checkedValue === 'sms'){
-        settingsSmsToatl += Number(smsCosts);
+        if(ovTotal < criticalLevels){
+            settingsSmsToatl += Number(smsCosts);
+        }
+        
     }
     else if(checkedValue === 'call'){
-        settingsCallsTotal += Number(callCosts);
+        if(ovTotal < criticalLevels){
+            settingsCallsTotal += Number(callCosts);
+        }
     }
 
     callSettingsTotals.innerHTML = settingsCallsTotal.toFixed(2)

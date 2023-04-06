@@ -25,19 +25,24 @@ rdBtns.forEach((item) => {
 
 let radioSmsTotal = 0;
 let radioCallTotal = 0;
+let overallTotal = 0;
 
 function radioTotalBill(){
     if(checkedVal === 'sms'){
-        radioSmsTotal += 0.75;
+        if(overallTotal < 50){
+            radioSmsTotal += 0.75;
+        }
     }
     else if(checkedVal === 'call'){
-        radioCallTotal += 2.75;
+        if(overallTotal < 50){
+            radioCallTotal += 2.75;
+        }
     }
 
     radioSmsEl.innerHTML = radioSmsTotal.toFixed(2);
     radioCallEl.innerHTML = radioCallTotal.toFixed(2);
 
-    let overallTotal = radioSmsTotal + radioCallTotal;
+    overallTotal = radioSmsTotal + radioCallTotal;
     radioTotal.innerHTML = overallTotal.toFixed(2);
 
     if(overallTotal >= 30){

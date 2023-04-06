@@ -24,10 +24,14 @@ function totalPhoneBill(log){
     var bill = 0;
     for(var i=0; i<allLogs.length; i++){
         if(allLogs[i] === 'call'){
-        bill += 2.75;
+            if(bill < 50){
+                bill += 2.75;
+            }
         }
         else if(allLogs[i] === 'sms'){
-        bill += 0.65;
+            if(bill < 50){
+                bill += 0.65;
+            }
         }
     }
 

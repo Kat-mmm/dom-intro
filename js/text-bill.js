@@ -18,20 +18,25 @@ let total = document.querySelector(".totalOne");
 
 let callsTotal = 0;
 let smsTotals = 0;
+let billTotal = 0;
 
 function textBillTotal(){
     let billVal = billType.value.toLowerCase().trim()
     if(billVal === 'sms'){
-        smsTotals += 0.75;
+        if(billTotal < 50){
+            smsTotals += 0.75;
+        }
     }
     else if(billVal === 'call'){
-        callsTotal += 2.75;
+        if(billTotal < 50){
+            callsTotal += 2.75;
+        }
     }
 
     callTotalEl.innerHTML = callsTotal.toFixed(2);
     smsTotalEl.innerHTML = smsTotals.toFixed(2);
 
-    let billTotal = callsTotal + smsTotals;
+    billTotal = callsTotal + smsTotals;
     total.innerHTML = billTotal.toFixed(2);
 
     if(billTotal >= 50){
