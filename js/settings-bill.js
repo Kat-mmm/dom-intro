@@ -64,7 +64,7 @@ updateSettingsBtn.addEventListener('click', updateSettinsBill)
 
 let settingsCallsTotal = 0;
 let settingsSmsToatl = 0;
-let ovTotal = 0;
+let ovTotal =  0;
 
 function totalSettingsBill(){
     if(checkedValue === 'sms'){
@@ -80,10 +80,6 @@ function totalSettingsBill(){
     ovTotal = settingsCallsTotal + settingsSmsToatl;
     settingsTotal.innerHTML = ovTotal.toFixed(2);
 
-    // if(ovTotal >= warningLevels){
-    //     settingsTotal.classList.add("warning");
-    // }
-    // ovTotal >= criticalLevels ? settingsTotal.classList.add("danger") : null;
     updateLevels(settingsTotal, ovTotal, warningLevels, criticalLevels);
 }
 
