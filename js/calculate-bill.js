@@ -17,21 +17,15 @@ let billTotalEl = document.querySelector(".billTotal");
 let billStringEl = document.querySelector(".billString");
 
 function totalPhoneBill(log){
-    log.replace(/\s+/g, '');
-    console.log(log)
-    var allLogs = log.toLowerCase().split(',');
+    var allLogs = log.toLowerCase().replace(/\s+/g, '').split(',');
 
     var bill = 0;
     for(var i=0; i<allLogs.length; i++){
         if(allLogs[i] === 'call'){
-            if(bill < 30){
-                bill += 2.75;
-            }
+            bill += 2.75;
         }
         else if(allLogs[i] === 'sms'){
-            if(bill < 30){
-                bill += 0.65;
-            }
+            bill += 0.65;
         }
     }
 

@@ -23,14 +23,10 @@ let billTotal = 0;
 function textBillTotal(){
     let billVal = billType.value.toLowerCase().trim()
     if(billVal === 'sms'){
-        if(billTotal < 50){
-            smsTotals += 0.75;
-        }
+        smsTotals += 0.75;
     }
     else if(billVal === 'call'){
-        if(billTotal < 50){
-            callsTotal += 2.75;
-        }
+        callsTotal += 2.75;
     }
 
     callTotalEl.innerHTML = callsTotal.toFixed(2);

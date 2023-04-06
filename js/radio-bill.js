@@ -29,14 +29,10 @@ let overallTotal = 0;
 
 function radioTotalBill(){
     if(checkedVal === 'sms'){
-        if(overallTotal < 50){
-            radioSmsTotal += 0.75;
-        }
+        radioSmsTotal += 0.75;
     }
     else if(checkedVal === 'call'){
-        if(overallTotal < 50){
-            radioCallTotal += 2.75;
-        }
+        radioCallTotal += 2.75;
     }
 
     radioSmsEl.innerHTML = radioSmsTotal.toFixed(2);
