@@ -24,12 +24,12 @@ function totalPhoneBill(log){
     var bill = 0;
     for(var i=0; i<allLogs.length; i++){
         if(allLogs[i] === 'call'){
-            if(bill < 50){
+            if(bill < 30){
                 bill += 2.75;
             }
         }
         else if(allLogs[i] === 'sms'){
-            if(bill < 50){
+            if(bill < 30){
                 bill += 0.65;
             }
         }
@@ -44,8 +44,8 @@ function calculateBtnClicked(){
     let roundedBillTotal = totalPhoneBill(billStringVal);
     billTotalEl.innerHTML = roundedBillTotal;
 
-    roundedBillTotal >= 30 ? billTotalEl.classList.add("warning") : billTotalEl.classList.remove("warning")
-    roundedBillTotal >=50 ? billTotalEl.classList.add("danger") : billTotalEl.classList.remove("danger")
+    roundedBillTotal >= 20 ? billTotalEl.classList.add("warning") : billTotalEl.classList.remove("warning")
+    roundedBillTotal >=30 ? billTotalEl.classList.add("danger") : billTotalEl.classList.remove("danger")
 }
 
 calculateBtn.addEventListener('click', calculateBtnClicked)
