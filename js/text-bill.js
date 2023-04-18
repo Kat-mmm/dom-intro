@@ -22,6 +22,7 @@ let billTotal = 0;
 
 function textBillTotal(){
     let billVal = billType.value.toLowerCase().trim()
+    
     if(billVal === 'sms'){
         smsTotals += 0.75;
     }

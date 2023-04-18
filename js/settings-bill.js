@@ -38,54 +38,56 @@ radioBtns.forEach((item) => {
     });
 });
 
-let smsCosts = 0;
-let callCosts = 0;
+// let smsCosts = 0;
+// let callCosts = 0;
 
-let criticalLevels = 0;
-let warningLevels = 0;
+// let criticalLevels = 0;
+// let warningLevels = 0;
 
-
-function updateSettinsBill(){
-    smsCosts = smsCost.value;
-    callCosts = callCost.value;
-
-    criticalLevels = criticalLevel.value;
-    warningLevels = warningLevel.value;
-
-    updateLevels(settingsTotal, grandTotal, warningLevels, criticalLevels);
-}
+let settings = settingsBill();
 
 function updateLevels(el, total, warningLevel, criticalLevel){
     total >= warningLevel ? el.classList.add("warning") : el.classList.remove("warning")
     total >= criticalLevel ? el.classList.add("danger") : el.classList.remove("danger")
 }
 
+function updateSettinsBill(){
+    settings.setSmsCost(Number(smsCost.value));
+    settings.setCallCost(Number(callCost.value));
+
+    settings.setWarningLevel(Number(warningLevel.value));
+    settings.setCriticalLevel(Number(criticalLevel.value));
+
+    updateLevels(settingsTotal, settings.getTotal(), settings.getWarningLevel(), settings.getCriticalLevel());
+}
+
 updateSettingsBtn.addEventListener('click', updateSettinsBill)
 
-let settingsCallsTotal = 0;
-let settingsSmsToatl = 0;
-let grandTotal =  0;
+// let settingsCallsTotal = 0;
+// let settingsSmsToatl = 0;
+// let grandTotal =  0;
 
 function totalSettingsBill(){
     if(checkedValue === 'sms'){
-        if(grandTotal < criticalLevels){
-            settingsSmsToatl += Number(smsCosts);
-        }
+        // if(grandTotal < criticalLevels){
+        //     settingsSmsToatl += Number(smsCosts);
+        // }
+        settings.sendSms();
         
     }
     else if(checkedValue === 'call'){
-        if(grandTotal < criticalLevels){
-            settingsCallsTotal += Number(callCosts);
-        }
+        // if(grandTotal < criticalLevels){
+        //     settingsCallsTotal += Number(callCosts);
+        // }
+        settings.makeCall();
     }
 
-    callSettingsTotals.innerHTML = settingsCallsTotal.toFixed(2)
-    smsSettingsTotals.innerHTML = settingsSmsToatl.toFixed(2)
+    callSettingsTotals.innerHTML = settings.getCallTotal()
+    smsSettingsTotals.innerHTML = settings.getSmsTotal()
 
-    grandTotal = settingsCallsTotal + settingsSmsToatl;
-    settingsTotal.innerHTML = grandTotal.toFixed(2);
+    settingsTotal.innerHTML = settings.getTotal();
 
-    updateLevels(settingsTotal, grandTotal, warningLevels, criticalLevels);
+    updateLevels(settingsTotal, settings.getTotal(), settings.getWarningLevel(), settings.getCriticalLevel());
 }
 
 addSettingsBillBtn.addEventListener('click', totalSettingsBill);
