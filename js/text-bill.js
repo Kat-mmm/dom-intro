@@ -21,7 +21,7 @@ let smsTotals = 0;
 let billTotal = 0;
 
 function textBillTotal(){
-    let billVal = billType.value.toLowerCase().trim()
+    let billVal = billType.value.toLowerCase().trim();
     
     if(billVal === 'sms'){
         smsTotals += 0.75;
@@ -42,8 +42,27 @@ function textBillTotal(){
     else if(billTotal >=30){
         total.classList.add("warning");
     }
+
+    
 }
 
+document.addEventListener('DOMContentLoaded', ()=>{
+    let totalsData = {
+        callsTotal,
+        smsTotals,
+        billTotal
+    }
+
+    let textBillTemplate  = document.querySelector('.textBillTemplate').innerHTML;
+    let template = Handlebars.compile(textBillTemplate);
+    let filledTemplate = template(totalsData);
+    document.querySelector('.textBillTable').innerHTML = filledTemplate;
+
+    callTotalEl = document.querySelector(".callTotalOne");
+    smsTotalEl = document.querySelector(".smsTotalOne");
+    total = document.querySelector(".totalOne");
+
+    addBtn.addEventListener('click', textBillTotal);
+})
 
 
-addBtn.addEventListener('click', textBillTotal)

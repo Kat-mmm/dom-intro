@@ -47,4 +47,23 @@ function radioTotalBill(){
     overallTotal >= 50 ? radioTotal.classList.add("danger") : null;
 }
 
-radioAddBtn.addEventListener('click', radioTotalBill)
+document.addEventListener("DOMContentLoaded", ()=>{
+    let totalsData = {
+        callsTotal: radioCallTotal,
+        smsTotals: radioSmsTotal,
+        billTotal: overallTotal
+    }
+
+    let textBillTemplate  = document.querySelector('.radioBillTemplate').innerHTML;
+    let template = Handlebars.compile(textBillTemplate);
+    let filledTemplate = template(totalsData);
+    document.querySelector('.radioBillTable').innerHTML = filledTemplate;
+
+    radioCallEl = document.querySelector(".callTotalTwo");
+    radioSmsEl = document.querySelector(".smsTotalTwo");
+    radioTotal = document.querySelector(".totalTwo");
+
+    radioAddBtn.addEventListener('click', radioTotalBill);
+})
+
+
